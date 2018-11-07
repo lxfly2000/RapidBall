@@ -1051,10 +1051,7 @@ void SaveReplay()
 		return;
 	if (repinput.SaveToFile(szReplayFileFullPath)==0)
 	{
-		char mdcmd[256];
-		SDL_snprintf(mdcmd, sizeof(mdcmd), "mkdir %s", SDL_GetPrefPath("lxfly2000", "RapidBall"));
-		system(mdcmd);
-		if (repinput.SaveToFile(szReplayFileFullPath)==0)
+		if(SDL_GetPrefPath("lxfly2000", "RapidBall")==NULL||repinput.SaveToFile(szReplayFileFullPath)==0)
 		{
 			replaySaved = -1;
 			return;
