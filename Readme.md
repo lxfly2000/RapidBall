@@ -7,7 +7,7 @@
 * 依赖项：需要下载 [SDL2](https://www.libsdl.org), [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf), [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer) 并放至相应位置，你可以运行目录中的`copysdl2.bat`按提示复制到正确的位置。
 
 ## 运行条件
-* Windows: Vista 及以后的操作系统；需要安装 [Visual Studio 2017 可再发行组件包](https://visualstudio.microsoft.com/zh-hans/downloads/)。
+* Windows: Vista 及以后的操作系统；需要安装 [Visual C++ 2017 可再发行组件包](https://visualstudio.microsoft.com/zh-hans/downloads/)。
 * Android: 需要 Android 4.2 及以上版本，不支持较早机型。
 
 ## 操作
