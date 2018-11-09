@@ -416,7 +416,7 @@ bool Load()
 	TTF_Init();
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
-	g_pWindow = SDL_CreateWindow("Rapid Ball 1.2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	g_pWindow = SDL_CreateWindow("Rapid Ball 1.3", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 	g_pRenderer = SDL_CreateRenderer(g_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -724,8 +724,9 @@ void Coll()
 		{
 			if (gameinfo.life < gameinfo.maxLife)
 				gameinfo.life++;
+			else
+				gameinfo.score += LIFEUP_SCORE;
 			PlaySFX(1);
-			gameinfo.score += LIFEUP_SCORE;
 			lifeups[i].available = false;
 			if (boards[lifeups[i].attachedtoboard].type != 1)
 				boards[lifeups[i].attachedtoboard].touched = true;
