@@ -536,8 +536,8 @@ void Loop()
 	SDL_Event e;
 	while (scene)
 	{
-		while(SDL_PollEvent(&e));
-		switch (e.type)
+		while(SDL_PollEvent(&e))
+		{switch (e.type)
 		{
 		case SDL_QUIT:scene = 0; break;
 		case SDL_FINGERDOWN:
@@ -635,7 +635,7 @@ void Loop()
 			case SDLK_ESCAPE:case SDLK_AC_BACK:keys.pressedBack = false; break;
 			}
 			break;
-		}
+		}}
 
 		SDL_SetRenderDrawColor(g_pRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(g_pRenderer);
