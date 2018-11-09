@@ -540,41 +540,6 @@ void Loop()
 		{switch (e.type)
 		{
 		case SDL_QUIT:scene = 0; break;
-		case SDL_FINGERDOWN:
-			if (e.tfinger.x < 0.5f)
-			{
-				keys.isonpress = !keys.pressedLeft;
-				keys.pressedLeft = true;
-			}
-			else
-			{
-				keys.isonpress = !keys.pressedRight;
-				keys.pressedRight = true;
-			}
-			if (e.tfinger.y < 0.5f)
-			{
-				keys.isonpress = !keys.pressedUp;
-				keys.pressedUp = true;
-			}
-			else
-			{
-				keys.isonpress = !keys.pressedDown;
-				keys.pressedDown = true;
-			}
-			keys.x = (int)(e.tfinger.x*screenWidth);
-			keys.y = (int)(e.tfinger.y*screenHeight);
-			break;
-		case SDL_FINGERUP:
-			keys.isonpress = false;
-			if (e.tfinger.x < 0.5f)
-				keys.pressedLeft = false;
-			else
-				keys.pressedRight = false;
-			if (e.tfinger.y < 0.5f)
-				keys.pressedUp = false;
-			else
-				keys.pressedDown = false;
-			break;
 		case SDL_MOUSEBUTTONDOWN:
 			if (e.button.button != SDL_BUTTON_LEFT)break;
 			if (e.button.x < screenWidth / 2)
