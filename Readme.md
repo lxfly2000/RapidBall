@@ -21,7 +21,8 @@
 * 2016-9-4 1.0: 制作完成。
 
 ## 下载
-[百度云](https://pan.baidu.com/s/1bphzocR)
+[GitHub](https://github.com/lxfly2000/RapidBall/releases)
+[Old Versions](https://pan.baidu.com/s/1bphzocR)
 
 ## 制作
 [lxfly2000](https://github.com/lxfly2000)
