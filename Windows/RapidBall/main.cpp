@@ -410,6 +410,17 @@ struct LifeUp
 int iLifeup = 0;
 unsigned g_srand = 0;
 
+void MakeBackground()
+{
+	SDL_SetRenderTarget(g_pRenderer, imgs[eImgBackground]->img);
+	SDL_Rect r = { 0,screenHeight,screenWidth,1 };
+	while (--r.y)
+	{
+		SDL_SetRenderDrawColor(g_pRenderer, 0, 0, (Uint8)(192 * pow(0.992, screenHeight - r.y)), 255);
+		SDL_RenderDrawLine(g_pRenderer, r.x, r.y, r.w, r.y);
+	}
+}
+
 bool Load()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -417,7 +428,7 @@ bool Load()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
 	g_pWindow = SDL_CreateWindow("Rapid Ball 1.3", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		screenWidth, screenHeight, SDL_WINDOW_SHOWN);
+		screenWidth, screenHeight, SDL_WINDOW_SHOWN|SDL_WINDOW_ALLOW_HIGHDPI|SDL_WINDOW_RESIZABLE);
 	g_pRenderer = SDL_CreateRenderer(g_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	SDL_SetRenderDrawBlendMode(g_pRenderer, SDL_BLENDMODE_BLEND);
@@ -464,13 +475,7 @@ bool Load()
 	imgs[eImgTextMenuReplaySaveFailed] = new Img(LoadTextToImage(g_pRenderer, "保存失败", fontItem, { 255,0,0,255 }), screenWidth / 2, imgs[eImgTextMenuRetry]->rect.h + screenHeight * 2 / 3);
 	imgs[eImgTextMenuReturn] = new Img(LoadTextToImage(g_pRenderer, "返回主界面", fontItem, { 255,255,255 }), screenWidth / 2, imgs[eImgTextMenuReplay]->rect.h + imgs[eImgTextMenuRetry]->rect.h + screenHeight * 2 / 3);
 	imgs[eImgBackground] = new Img(SDL_CreateTexture(g_pRenderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_TARGET, screenWidth, screenHeight), screenWidth / 2, screenHeight / 2);
-	SDL_SetRenderTarget(g_pRenderer, imgs[eImgBackground]->img);
-	SDL_Rect r = { 0,screenHeight,screenWidth,1 };
-	while (--r.y)
-	{
-		SDL_SetRenderDrawColor(g_pRenderer, 0, 0, (Uint8)(192 * pow(0.992, screenHeight - r.y)), 255);
-		SDL_RenderDrawLine(g_pRenderer, r.x, r.y, r.w, r.y);
-	}
+	MakeBackground();
 	ball = new Ball(imgs[eImgTextBall]->img, 0);
 	ball->radius = imgs[eImgTextBall]->rect.w / 2 + 1;
 
@@ -598,6 +603,15 @@ void Loop()
 			case SDLK_DOWN:keys.pressedDown = false; break;
 			case SDLK_MENU:case SDLK_RETURN:keys.pressedOK = false; break;
 			case SDLK_ESCAPE:case SDLK_AC_BACK:keys.pressedBack = false; break;
+			}
+			break;
+		case SDL_WINDOWEVENT:
+			switch (e.window.event)
+			{
+			case SDL_WINDOWEVENT_RESIZED:
+				MakeBackground();
+				SDL_SetRenderTarget(g_pRenderer, NULL);
+				break;
 			}
 			break;
 		}}
